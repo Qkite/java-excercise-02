@@ -20,7 +20,7 @@ public class MapExcercise2 {
         }
 
 
-        //
+        // map의 key 값을 이용해서 알파벳 문자인지 확인하기
         for (int i=0; i<repoAddr.length();i++){
             String letter = String.valueOf(repoAddrLower.charAt(i));
             if (alphabetCnt.keySet().contains(letter)){
