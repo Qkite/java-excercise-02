@@ -32,8 +32,6 @@ public class MapExcercise2 {
         System.out.println(alphabetCnt.get("c"));
         System.out.println(alphabetCnt.get("r"));
 
-
-
     }
 }
 
