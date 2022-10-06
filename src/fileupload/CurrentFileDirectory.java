@@ -13,4 +13,16 @@ public class CurrentFileDirectory {
             System.out.println(file);
         }
     }
+
+    /*
+
+    .\.git
+    .\.idea
+    .\a_file.txt
+    .\java-excercise-02.iml
+    .\out
+    .\README.md
+    .\src
+
+     */
 }
