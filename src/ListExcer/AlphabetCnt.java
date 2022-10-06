@@ -43,5 +43,8 @@ public class AlphabetCnt {
             }
         }
 
+        System.out.println(alphabetMap);
+
+
     }
 }
