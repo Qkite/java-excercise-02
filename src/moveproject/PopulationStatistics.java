@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PopulationStatistics {
 
@@ -61,6 +63,32 @@ public class PopulationStatistics {
         // from이 전출, to가 전입
     }
 
+
+    public String addressMaping(int addressInteger){
+        Map<Integer, String> addressMap = new HashMap<>();
+
+        // map에 시도 넣기
+        addressMap.put(11,"서울특별시");
+        addressMap.put(21, "부산광역시");
+        addressMap.put(22, "대구광역시");
+        addressMap.put(23, "인천광역시");
+        addressMap.put(24, "광주광역시");
+        addressMap.put(25, "대전광역시");
+        addressMap.put(26, "울산광역시");
+        addressMap.put(29, "세종특별자치시");
+        addressMap.put(31, "경기도");
+        addressMap.put(32, "강원도");
+        addressMap.put(33, "충청북도");
+        addressMap.put(34, "충청남도");
+        addressMap.put(35, "전라북도");
+        addressMap.put(36, "전라남도");
+        addressMap.put(37, "경상북도");
+        addressMap.put(38, "경상남도");
+        addressMap.put(39, "제주특별자치도");
+
+        return addressMap.get(addressInteger);
+    }
+
     public static void main(String[] args) throws IOException {
         String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
 
@@ -71,6 +99,7 @@ public class PopulationStatistics {
         PopulationMove populationMove = populationStatistics.parse(data);
         System.out.println(populationMove.getFromAddress());
         System.out.println(populationMove.getToAddress());
+        System.out.println(populationStatistics.addressMaping(populationMove.getFromAddress()));
 
     }
 }
