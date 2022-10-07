@@ -52,9 +52,9 @@ public class PopulationStatistics {
             char content = (char) fileReader.read(); // read를 했을 때 파일을 읽어옴
             fileContents += content;
             System.out.print(content);
-
         }
     }
+
     public PopulationMove parse(String data){
         String[] addresses = data.split(",");
         return new PopulationMove (Integer.valueOf(addresses[0]),Integer.valueOf(addresses[1]));
