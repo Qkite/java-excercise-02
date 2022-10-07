@@ -142,6 +142,30 @@ public class PopulationStatistics {
         return moveCntMap;
     }
 
+    public Map<String, Integer> heatmapIdxMap (){
+        Map<String, Integer> map = new HashMap<>();
+        map.put("11",0);
+        map.put("26",1);
+        map.put("27",2);
+        map.put("28",3);
+        map.put("29",4);
+        map.put("30",5);
+        map.put("31",6);
+        map.put("36",7);
+        map.put("41",8);
+        map.put("42",9);
+        map.put("43",10);
+        map.put("44",11);
+        map.put("45",12);
+        map.put("46",13);
+        map.put("47",14);
+        map.put("48",15);
+        map.put("50",16);
+
+        return map;
+    }
+
+
     public static void main(String[] args) throws IOException {
 //        String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
 //
@@ -175,11 +199,14 @@ public class PopulationStatistics {
 //        }
 
         Map<String, Integer> map = populationStatistics.getMoveCntMap(pml);
-        String targetFileName = "each_sido_cnt.txt";
+        Map<String, Integer> heatMapIdxMap = populationStatistics.heatmapIdxMap();
+
+        String targetFileName = "for_heatmap.txt";
         populationStatistics.CreateAFile(targetFileName);
         List<String> cntResult = new ArrayList<>();
         for(String key: map.keySet()){
-            String s = String.format("key:%s, value:%d\n", key, map.get(key));
+            String[] fromto = key.split(",");
+            String s = String.format("[%s, %s, %d],", heatMapIdxMap.get(fromto[0]), heatMapIdxMap.get(fromto[1]), map.get(key));
             cntResult.add(s);
         }
         populationStatistics.write(cntResult, targetFileName);
