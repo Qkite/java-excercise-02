@@ -1,12 +1,10 @@
 package moveproject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +12,7 @@ import java.util.Map;
 public class PopulationStatistics {
 
     public List<PopulationMove> readFileByLine(String filename) throws IOException {
+        List<PopulationMove> pml = new ArrayList<>();
         BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(filename)
         );
@@ -21,12 +20,12 @@ public class PopulationStatistics {
 
         String str;
         while ((str = bufferedReader.readLine()) != null) {
-            System.out.println(str);
+            //System.out.println(str);
+            PopulationMove pm = parse(str);
+            pml.add(pm);
         }
-
         bufferedReader.close();
-
-        return null;
+        return pml;
     }
 
     public void readFileByLine2(String filename) {
@@ -62,7 +61,7 @@ public class PopulationStatistics {
 
     public PopulationMove parse(String data){
         String[] addresses = data.split(",");
-        return new PopulationMove (Integer.valueOf(addresses[6]),Integer.valueOf(addresses[0]));
+        return new PopulationMove (Integer.valueOf(addresses[0]),Integer.valueOf(addresses[1])); // parsing
         // from이 전출, to가 전입
     }
 
@@ -104,19 +103,59 @@ public class PopulationStatistics {
 
     }
 
+    // List<String>을 지정한 파일에 write
+    public void write(List<String> strs, String filename){
+        File file = new File(filename);
+
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter((file)));
+            for (String str: strs){
+                writer.write(str);
+            }
+            writer.close();
+
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public String fromToString(PopulationMove populationMove){
+        return populationMove.getFromAddress() + "," + populationMove.getToAddress()+"\n";
+    }
+
     public static void main(String[] args) throws IOException {
-        String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
+//        String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
+//
+//        PopulationStatistics populationStatistics = new PopulationStatistics();
+//        // populationStatistics.readFileByLine2(fileLocation); // static 하게 하지 않기 위해서는 인스턴스 불러와야함
+//
+//        String data = "50,130,62000,2021,12,20,26,350,52000,1,1,027,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,528528";
+//        PopulationMove populationMove = populationStatistics.parse(data);
+//        System.out.println(populationMove.getFromAddress());
+//        System.out.println(populationMove.getToAddress());
+//        System.out.println(populationStatistics.addressMaping(populationMove.getFromAddress()));
+//
+//        populationStatistics.CreateAFile("from_to.txt");
+//
+//        List<PopulationMove> pml = populationStatistics.readFileByLine(fileLocation);
+//
+//        List<String> strings = new ArrayList<>();
+//
+//        for (PopulationMove pm: pml){
+//            String fromTo = populationStatistics.fromToString(pm);
+//            strings.add(fromTo);
+//        }
+//        populationStatistics.write(strings, "./from_to.txt");
 
-        PopulationStatistics populationStatistics = new PopulationStatistics();
-        // populationStatistics.readFileByLine2(fileLocation); // static 하게 하지 않기 위해서는 인스턴스 불러와야함
+        String address = "./from_to.txt";
+        PopulationStatistics populationStatistics= new PopulationStatistics();
+        List<PopulationMove> pml = populationStatistics.readFileByLine(address);
 
-        String data = "50,130,62000,2021,12,20,26,350,52000,1,1,027,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,528528";
-        PopulationMove populationMove = populationStatistics.parse(data);
-        System.out.println(populationMove.getFromAddress());
-        System.out.println(populationMove.getToAddress());
-        System.out.println(populationStatistics.addressMaping(populationMove.getFromAddress()));
-
-        populationStatistics.CreateAFile("from_to.txt");
+        for (PopulationMove pm: pml){
+            System.out.printf("전입:%s, 전출:%s\n", pm.getFromAddress(), pm.getToAddress());
+        }
 
     }
 }
