@@ -71,22 +71,24 @@ public class PopulationStatistics {
 
         // map에 시도 넣기
         addressMap.put(11,"서울특별시");
-        addressMap.put(21, "부산광역시");
-        addressMap.put(22, "대구광역시");
-        addressMap.put(23, "인천광역시");
-        addressMap.put(24, "광주광역시");
-        addressMap.put(25, "대전광역시");
-        addressMap.put(26, "울산광역시");
-        addressMap.put(29, "세종특별자치시");
-        addressMap.put(31, "경기도");
-        addressMap.put(32, "강원도");
-        addressMap.put(33, "충청북도");
-        addressMap.put(34, "충청남도");
-        addressMap.put(35, "전라북도");
-        addressMap.put(36, "전라남도");
-        addressMap.put(37, "경상북도");
-        addressMap.put(38, "경상남도");
-        addressMap.put(39, "제주특별자치도");
+        addressMap.put(26, "부산광역시");
+        addressMap.put(27, "대구광역시");
+        addressMap.put(28, "인천광역시");
+        addressMap.put(29, "광주광역시");
+        addressMap.put(30, "대전광역시");
+        addressMap.put(31, "울산광역시");
+        addressMap.put(36, "세종특별자치시");
+        addressMap.put(41, "경기도");
+        addressMap.put(42, "강원도");
+        addressMap.put(43, "충청북도");
+        addressMap.put(44, "충청남도");
+        addressMap.put(45, "전라북도");
+        addressMap.put(46, "전라남도");
+        addressMap.put(47, "경상북도");
+        addressMap.put(48, "경상남도");
+        addressMap.put(50, "제주특별자치도");
+
+
 
         return addressMap.get(addressInteger);
     }
@@ -125,6 +127,21 @@ public class PopulationStatistics {
         return populationMove.getFromAddress() + "," + populationMove.getToAddress()+"\n";
     }
 
+
+    public Map<String, Integer> getMoveCntMap(List<PopulationMove> pml){
+        Map<String, Integer> moveCntMap = new HashMap<>();
+        for(PopulationMove pm: pml){
+            String key = pm.getFromAddress() + "," + pm.getToAddress();
+            if (moveCntMap.get(key) == null){
+                moveCntMap.put(key, 1);
+
+            } else{
+                moveCntMap.put(key, moveCntMap.get(key)+1);
+            }
+        }
+        return moveCntMap;
+    }
+
     public static void main(String[] args) throws IOException {
 //        String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
 //
@@ -153,9 +170,25 @@ public class PopulationStatistics {
         PopulationStatistics populationStatistics= new PopulationStatistics();
         List<PopulationMove> pml = populationStatistics.readFileByLine(address);
 
-        for (PopulationMove pm: pml){
-            System.out.printf("전입:%s, 전출:%s\n", pm.getFromAddress(), pm.getToAddress());
+//        for (PopulationMove pm: pml){
+//            System.out.printf("전입:%s, 전출:%s\n", pm.getFromAddress(), pm.getToAddress());
+//        }
+
+        Map<String, Integer> map = populationStatistics.getMoveCntMap(pml);
+        String targetFileName = "each_sido_cnt.txt";
+        populationStatistics.CreateAFile(targetFileName);
+        List<String> cntResult = new ArrayList<>();
+        for(String key: map.keySet()){
+            String s = String.format("key:%s, value:%d\n", key, map.get(key));
+            cntResult.add(s);
         }
+        populationStatistics.write(cntResult, targetFileName);
+
+
+
+
+
+
 
     }
 }
