@@ -1,17 +1,19 @@
 package moveproject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PopulationStatistics {
 
-    public void readFileByLine(String filename) throws IOException {
+    public List<PopulationMove> readFileByLine(String filename) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(filename)
         );
@@ -24,6 +26,7 @@ public class PopulationStatistics {
 
         bufferedReader.close();
 
+        return null;
     }
 
     public void readFileByLine2(String filename) {
@@ -88,6 +91,18 @@ public class PopulationStatistics {
 
         return addressMap.get(addressInteger);
     }
+    
+    // 파일 생성하는 메소드
+    public void CreateAFile(String filename){
+        File file = new File(filename);
+
+        try{
+            file.createNewFile(); // 파일이 생성됨
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public static void main(String[] args) throws IOException {
         String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
@@ -100,6 +115,8 @@ public class PopulationStatistics {
         System.out.println(populationMove.getFromAddress());
         System.out.println(populationMove.getToAddress());
         System.out.println(populationStatistics.addressMaping(populationMove.getFromAddress()));
+
+        populationStatistics.CreateAFile("from_to.txt");
 
     }
 }
