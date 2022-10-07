@@ -57,14 +57,20 @@ public class PopulationStatistics {
 
     public PopulationMove parse(String data){
         String[] addresses = data.split(",");
-        return new PopulationMove (Integer.valueOf(addresses[0]),Integer.valueOf(addresses[1]));
+        return new PopulationMove (Integer.valueOf(addresses[6]),Integer.valueOf(addresses[0]));
+        // from이 전출, to가 전입
     }
 
     public static void main(String[] args) throws IOException {
         String fileLocation = "C:\\Users\\yeonji\\Desktop\\movedata\\2021_인구관련연간자료_20220927_66125.csv";
 
         PopulationStatistics populationStatistics = new PopulationStatistics();
-        populationStatistics.readFileByLine2(fileLocation); // static 하게 하지 않기 위해서는 인스턴스 불러와야함
+        // populationStatistics.readFileByLine2(fileLocation); // static 하게 하지 않기 위해서는 인스턴스 불러와야함
+
+        String data = "50,130,62000,2021,12,20,26,350,52000,1,1,027,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,528528";
+        PopulationMove populationMove = populationStatistics.parse(data);
+        System.out.println(populationMove.getFromAddress());
+        System.out.println(populationMove.getToAddress());
 
     }
 }
