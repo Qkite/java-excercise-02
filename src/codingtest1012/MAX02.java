@@ -3,7 +3,12 @@ package codingtest1012;
 public class MAX02 {
 
     public int getMax(int[] arr){
-        int maxValue=0;
+        
+
+        //int maxValue=0; -> 배열의 값이 모두 음수인 경우는 0이 최댓값으로
+
+        int maxValue = arr[0]; // 배열의 첫번째 값이 max
+        
         for (int i=0; i<arr.length; i++){
             if (arr[i]<maxValue){
                 maxValue = arr[i];
