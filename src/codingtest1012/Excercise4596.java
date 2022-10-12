@@ -10,9 +10,11 @@ public class Excercise4596 {
         int maxi = 0;
         int maxj = 0;
 
+        Scanner scan = new Scanner(System.in);
+
         for(int i=1; i<=9; i++){
 
-            Scanner scan = new Scanner(System.in);
+
 
             String[] inputLine = scan.nextLine().split(" ");
 
