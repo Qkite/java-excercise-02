@@ -14,8 +14,6 @@ public class Excercise4596 {
 
         for(int i=1; i<=9; i++){
 
-
-
             String[] inputLine = scan.nextLine().split(" ");
 
             for (int j=0; j<9;j++) {
@@ -33,7 +31,6 @@ public class Excercise4596 {
 
         System.out.println(max);
         System.out.printf("%d %d", maxi, maxj);
-
 
     }
 
