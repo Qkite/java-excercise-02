@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public class InsertionSort01 {
 
-    public int[] sort(int[] arr){
-        int i=1;
-        if(arr[i] < arr[i-1]){
+    public int[] sort(int[] arr, int i){
+
+        int j=i;
+        if(arr[j] < arr[j-1]){
             int temp;
-            temp = arr[i];
-            arr[i] = arr[i-1];
-            arr[i-1] = temp;
+            temp = arr[j];
+            arr[j] = arr[j-1];
+            arr[j-1] = temp;
         }
 
         return arr;
@@ -20,7 +21,8 @@ public class InsertionSort01 {
     public static void main(String[] args) {
         int[] arr = {8,5,6,2,4};
         InsertionSort01 insertionSort01 = new InsertionSort01();
-        int[] result = insertionSort01.sort(arr);
+        arr = new int[]{5,8,6,2,4};
+        int[] result = insertionSort01.sort(arr,2);
 
         System.out.println(Arrays.toString(result));
 
