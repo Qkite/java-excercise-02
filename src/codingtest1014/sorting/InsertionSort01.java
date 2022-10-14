@@ -9,6 +9,7 @@ public class InsertionSort01 {
         return new int[]{};
     }
 
+
     public static void main(String[] args) {
         int[] arr = {8,5,6,2,4};
         InsertionSort01 insertionSort01 = new InsertionSort01();
