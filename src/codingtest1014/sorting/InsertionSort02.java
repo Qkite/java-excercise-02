@@ -24,10 +24,10 @@ public class InsertionSort02 {
 
 
     public static void main(String[] args) {
-        int[] arr = {8,5,6,2,4};
+        //int[] arr = {8,5,6,2,4};
+        int[] arr = {8,5,6,2,4,5,7};
         InsertionSort02 insertionSort01 = new InsertionSort02();
-        arr = new int[]{5,8,6,2,4};
-        int[] result = insertionSort01.sort(arr,2);
+        int[] result = insertionSort01.sort(arr,1); // i가 1부터 시작하기 때문에 1을 넣음
 
         System.out.println(Arrays.toString(result));
 
