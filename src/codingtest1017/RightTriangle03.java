@@ -2,7 +2,11 @@ package codingtest1017;
 
 public class RightTriangle03 {
 
-    private char character;
+    private char character = '*';
+
+    public RightTriangle03(){
+        // 빈 constructor는 default 값일 때 *로 찍기를 하기 위해서 추가함
+    }
 
     public RightTriangle03(char character){
         this.character = character;
