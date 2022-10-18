@@ -1,4 +1,4 @@
-package assignment_1005;
+package assignment1005;
 
 import java.util.Scanner;
 public class Excercise1018 {
